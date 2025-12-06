@@ -87,7 +87,7 @@
   users.users.ricmaps = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
   };
 
   programs.zsh.enable = true;
