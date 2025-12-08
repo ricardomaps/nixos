@@ -62,16 +62,6 @@
   #  enableConfiguredRecompile = true;
   # };
 
-  services.kmonad = {
-    enable = true;
-    keyboards = {
-      my-keyboard = {
-        device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-        config = builtins.readFile ./features/kmonad;
-      };
-    };
-  };
-
   services.flatpak.enable = true;
 
   hardware.bluetooth.enable = true;
