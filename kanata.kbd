@@ -1,0 +1,117 @@
+;; Home row mods QWERTY example with more complexity.
+;; Some of the change from the basic example:
+;; - when a home row mod activates tap, the home row mods are disabled
+;;   while continuing to type rapidly
+;; - tap-hold-release helps make the hold action more responsive
+;; - pressing another key on the same half of the keyboard
+;;   as the home row mod will activate an early tap action
+;;
+;; Suggested further reading:
+;;
+;; GitHub discussion on more advanced tap-hold improvements:
+;;
+;;    https://github.com/jtroo/kanata/discussions/1455
+;;
+;; Configuration guide documentation on all tap-hold options:
+;;
+;;    https://github.com/jtroo/kanata/blob/main/docs/config.adoc#tap-hold
+
+(defsrc
+  q  w  e  r  t  y  u  i  o  p
+  a  s  d  f  g  h  j  k  l  ; ' \
+  z  x  c  v  b  n  m
+          spc        rctl
+)
+
+(deflayer base
+  q  w  f  p  b  j  l  u  y  ; 
+  @a @r @s @t g  m  @n @e @i @o ' \
+  x  c  d  v  z  k  h 
+         @spc        rctl
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-time 200
+  hold-time 175
+  tap-time-index 200
+  hold-time-index 150
+  ;; hold-time-index 
+  ;; tap-time-middle 175
+  ;; hold-time-middle 125
+  ;; tap-time-ring 200
+  ;; hold-time-ring 175
+  ;; tap-time-pinky 250
+  ;; hold-time-pinky 200
+
+  left-hand-keys (
+    1 2 3 4 5
+    q  w  e  r  t ;; q w f p b 
+    a  s  d  f  g ;; a r s t g 
+    z  x  c  v  b ;; x c d v z 
+  )
+
+  right-hand-keys (
+    6 7 8 9 0 - =
+    y  u  i  o  p
+    h  j  k  l  ; '
+    n  m  ,  .  /
+;; j l u y ; 
+;; m n e i o 
+;; k h , . /
+  )
+
+  movement-keys (
+    n e i o
+  )
+)
+
+(deflayer nomods
+  q w f p b j l u y ; 
+  a r s t g m n e i o ' \
+  x c d v z k h
+        spc    rctl
+)
+
+(deflayer movement
+  _ _ home _ _ _ _ pgup _ _ 
+  _ _ _ _ _ _ lft down up rght _ _
+  _ _ pgdn _ _ _ end
+        _    _
+)
+
+(deflayer numbers
+  _ _ _ _ _ _ _ _ _ _ 
+  1 2 3 4 5 6 7 8 9 0 - =
+  _ _ _ _ _ _ _
+        _    _
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  ralt (one-shot 500 lsft)
+)
+
+(defalias
+  tap (multi
+    (layer-switch nomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+  
+  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
+  r (tap-hold-release-keys $tap-time $hold-time (multi r @tap) lalt $left-hand-keys)
+  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lctl $left-hand-keys)
+  t (tap-hold-release-keys $tap-time $hold-time (multi t @tap) lsft $left-hand-keys)
+  n (tap-hold-release-keys $tap-time $hold-time (multi n @tap) rsft $right-hand-keys)
+  e (tap-hold-release-keys $tap-time $hold-time (multi e @tap) rctl $right-hand-keys)
+  i (tap-hold-release-keys $tap-time $hold-time (multi i @tap) ralt $right-hand-keys)
+  o (tap-hold-release-keys $tap-time $hold-time (multi o @tap) rmet $right-hand-keys)
+  spc (tap-hold-release-keys $tap-time $hold-time spc (layer-while-held movement) $movement-keys)
+;;  rctl (layer-switch numbers)
+
+)
