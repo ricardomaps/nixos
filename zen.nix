@@ -1,7 +1,11 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
-  pograms.zen-browser = {
+  imports = [
+    inputs.zen-browser.homeModules.default
+  ];
+
+  programs.zen-browser = {
     enable = true;
     profiles.ricmaps = {
       name = "ricmaps";
@@ -18,18 +22,16 @@
         engines = {
           youtube = {
             name = "YouTube";
-            urls = lib.singleton
-              {
+            urls = lib.singleton {
                 template = "https://www.youtube.com/results";
-                params = lib.attrsToList { "search_query"= "{searchTerms}"; };
+                params = lib.attrsToList { "search_query" = "{searchTerms}"; };
               };
             definedAliases = ["@yt"];
           };
 
           mynixos = {
             name = "MyNixOS";
-            urls = lib.singleton
-              {
+            urls = lib.singleton {
                 template = "https://mynixos.com/search";
                 params = lib.attrsToList { "query" = "{searchTerms}"; };
               };

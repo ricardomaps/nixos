@@ -5,6 +5,7 @@
     ./niri.nix
     ./noctalia.nix
     ./zen.nix
+    ./mango.nix
   ];
 
   home.username = "ricmaps";
@@ -16,10 +17,6 @@
     radare2
     inputs.librepods.packages."x86_64-linux".default
     steel
-  ];
-
-  nixpkgs.overlays = [
-    inputs.helix.overlays.default
   ];
 
   home.pointerCursor = {
@@ -64,6 +61,7 @@
     enableZshIntegration = true;
     settings = {
       theme = "nord";
+      pane_frames = false;
     };
     extraConfig = ''
       show_startup_tips false
@@ -138,7 +136,7 @@
   
   programs.zsh = {
     enable = true;
-    completion.enable = true;
+    enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     autocd = true;
@@ -148,6 +146,10 @@
     initContent = ''
       eval "$(starship init zsh)"
     '';
+  };
+
+  programs.nushell  = {
+    enable = true;
   };
 
   programs.alacritty = {
@@ -171,7 +173,7 @@
       };
 
       window = {
-        opacity = 1.0;
+        opacity = 0.9;
       };
     };
   };

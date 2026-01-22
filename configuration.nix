@@ -92,8 +92,10 @@
   users.users.ricmaps = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
   };
+
+  programs.zsh.enable = true;
 
   # fonts
   fonts.packages = with pkgs; [
