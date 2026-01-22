@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.mango.homeModules.mango
+    inputs.mango.hmModules.mango
   ];
 
   wayland.windowManager.mango = {

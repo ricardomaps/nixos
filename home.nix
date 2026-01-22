@@ -87,6 +87,12 @@
     enable = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    enableNushellIntegration = true;
+  };
+
   programs.zathura = {
     enable = true;
   };
@@ -133,7 +139,7 @@
       marksman
     ];
   };
-  
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
