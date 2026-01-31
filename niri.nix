@@ -280,10 +280,13 @@ in
       "Mod+Ctrl+F".action = expand-column-to-available-width;
 
       "Mod+Ctrl+N".action = move-column-left;
+      "Mod+Ctrl+Left".action = move-column-left;
       "Mod+Ctrl+O".action = move-column-right;
+      "Mod+Ctrl+Right".action = move-column-right;
       "Mod+Ctrl+E".action = move-window-down;
+      "Mod+Ctrl+Down".action = move-window-down;
       "Mod+Ctrl+I".action = move-window-up;
-
+      "Mod+Ctrl+Up".action = move-window-up;
 
       "Mod+Minus".action = set-column-width "-10%";
       "Mod+Equal".action = set-column-width "+10%";

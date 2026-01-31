@@ -17,6 +17,7 @@
     radare2
     inputs.librepods.packages."x86_64-linux".default
     steel
+    vial
   ];
 
   home.pointerCursor = {
@@ -43,6 +44,10 @@
       ".env"
       ".envrc"
     ];
+  };
+
+  programs.jujutsu = {
+    enable = true;
   };
 
   programs.direnv = {
@@ -137,6 +142,8 @@
       nixd
       gopls
       marksman
+      rust-analyzer
+      rustfmt
     ];
   };
 
