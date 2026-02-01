@@ -112,6 +112,9 @@
 
   programs.yazi = {
     enable = true;
+    flavors = {
+      nord = pkgs.yaziPlugins.nord;
+    };
     # theme = O -- check this later
   };
 
@@ -183,7 +186,7 @@
   };
 
   programs.alacritty = {
-    enable = true;
+    enable = false;
     package = pkgs.alacritty.override {
       withGraphics = true;
     };
