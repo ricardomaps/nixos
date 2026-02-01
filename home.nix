@@ -211,13 +211,27 @@
     };
   };
 
+  programs.kitty = {
+    enable = true;
+    themeFile = "Nord";
+    settings = {
+      enable_audio_bell = false;
+      font_family = "Fira Mono Nerd Font";
+      font_size = 12;
+      shell_integration = "no-rc";
+      dynamic_background_opacity = true;
+      allow_remote_control = true;
+    };
+  };
+
   # programs.opencode = {
   #   enable = true;
   # };
   
-  programs.ghostty = {
-    enable = true;
-  };
+  # this is slooooooowww
+  # programs.ghostty = {
+  #   enable = true;
+  # };
   
   home.stateVersion = "25.11";
 
