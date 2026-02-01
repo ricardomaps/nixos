@@ -63,10 +63,14 @@
 
   programs.zellij = {
     enable = true;
-    package = pkgs.zellij.overrideAttrs (prev: {
-      buildNoDefaultFeatures = true;
-      buildFeatures = [ "plugins_from_target" "vendored_curl" ];
-    });
+    # i don't know how to make this work :(
+    # 
+    # package = pkgs.zellij.overrideAttrs (prev: {
+    #   cargoBuildFlags = (prev.cargoBuildFlags or []) ++ [
+    #     "--no-default-features"
+    #     "--features" "plugins_from_target,vendored_curl"
+    #   ];
+    # });
     enableZshIntegration = true;
     settings = {
       theme = "nord";
@@ -93,6 +97,10 @@
   };
 
   programs.ripgrep = {
+    enable = true;
+  };
+
+  programs.fd = {
     enable = true;
   };
 
@@ -176,6 +184,9 @@
 
   programs.alacritty = {
     enable = true;
+    package = pkgs.alacritty.override {
+      withGraphics = true;
+    };
     theme = "nord";
     settings = {
       font = {
