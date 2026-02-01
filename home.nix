@@ -63,6 +63,10 @@
 
   programs.zellij = {
     enable = true;
+    package = pkgs.zellij.overrideAttrs (prev: {
+      buildNoDefaultFeatures = true;
+      buildFeatures = [ "plugins_from_target" "vendored_curl" ];
+    });
     enableZshIntegration = true;
     settings = {
       theme = "nord";
@@ -96,6 +100,11 @@
     enable = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
+  };
+
+  programs.yazi = {
+    enable = true;
+    # theme = O -- check this later
   };
 
   programs.zathura = {
