@@ -95,8 +95,14 @@
   users.users.ricmaps = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.interactiveShellInit = ''
+    if ! [ "$TERM" = "dumb" ] && [ -z "$ZSH_EXECUTION_STRING" ]; then
+      exec nu
+    fi
+  '';
 
   programs.zsh.enable = true;
 
@@ -123,6 +129,10 @@
     unzip
     xwayland-satellite
     usbutils
+  ];
+
+  environment.shells = with pkgs;[
+    nushell
   ];
 
   documentation = {

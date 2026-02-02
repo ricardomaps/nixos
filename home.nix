@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   imports = [
@@ -177,9 +177,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     autocd = true;
-    loginExtra = ''
-      fastfetch
-    '';
     initContent = ''
       eval "$(starship init zsh)"
     '';
@@ -187,6 +184,13 @@
 
   programs.nushell  = {
     enable = true;
+    envFile = {
+      text = ''
+        $env.config.buffer_editor = "hx"
+        $env.config.show_banner = false
+      '';
+    };
+    # environmentVariables = config.home.sessionVariables;
   };
 
   programs.alacritty = {
