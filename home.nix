@@ -193,6 +193,11 @@
     # environmentVariables = config.home.sessionVariables;
   };
 
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
   programs.alacritty = {
     enable = true;
     package = pkgs.alacritty.override (_: {
