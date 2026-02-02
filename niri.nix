@@ -31,7 +31,7 @@ in
         natural-scroll = true;
       };
 
-      warp-mouse-to-focus = true;
+      warp-mouse-to-focus.enable = true;
       focus-follows-mouse = {
         enable = true;
         max-scroll-amount = "100%";

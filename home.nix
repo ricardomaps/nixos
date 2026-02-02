@@ -115,7 +115,11 @@
     flavors = {
       nord = pkgs.yaziPlugins.nord;
     };
-    # theme = O -- check this later
+    theme = {
+      flavor = {
+        dark = "nord";
+      };
+    };
   };
 
   programs.zathura = {
@@ -186,10 +190,10 @@
   };
 
   programs.alacritty = {
-    enable = false;
-    package = pkgs.alacritty.override {
+    enable = true;
+    package = pkgs.alacritty.override (_: {
       withGraphics = true;
-    };
+    });
     theme = "nord";
     settings = {
       font = {
@@ -215,7 +219,7 @@
   };
 
   programs.kitty = {
-    enable = true;
+    enable = false;
     themeFile = "Nord";
     settings = {
       enable_audio_bell = false;
@@ -227,12 +231,12 @@
     };
   };
 
+  programs.wezterm = {
+    enable = true;
+  };
+
+  # opencode doesn't build at all in my machine
   # programs.opencode = {
-  #   enable = true;
-  # };
-  
-  # this is slooooooowww
-  # programs.ghostty = {
   #   enable = true;
   # };
   
