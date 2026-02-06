@@ -44,6 +44,8 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
+  services.udisks2.enable = true;
+
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
@@ -98,12 +100,6 @@
     shell = pkgs.zsh;
   };
 
-  programs.zsh.interactiveShellInit = ''
-    if ! [ "$TERM" = "dumb" ] && [ -z "$ZSH_EXECUTION_STRING" ]; then
-      exec nu
-    fi
-  '';
-
   programs.zsh.enable = true;
 
   # fonts
@@ -147,6 +143,9 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

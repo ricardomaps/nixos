@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -18,6 +18,7 @@
     inputs.librepods.packages."x86_64-linux".default
     steel
     vial
+    nu_scripts
   ];
 
   home.pointerCursor = {
@@ -27,6 +28,10 @@
     size = 24;
     x11.enable = true;
     gtk.enable = true;
+  };
+
+  services.udiskie = {
+    enable = true;
   };
 
   programs.quickshell = {
@@ -120,6 +125,38 @@
         dark = "nord";
       };
     };
+    settings = {
+      mgr = {
+        show_hidden = true;
+        show_symlink = true;
+      };
+      preview = {
+        image_quality = 90;
+        image_filter = "lanczos3";
+      };
+      opener = {
+        nu-explore = [
+          {
+            run = ''nu -e "
+              def collect-data [...files] {
+                $files
+                | each { |f|
+                    let d = open $f
+                    match ($d | describe) {
+                      "list" => $d
+                      _      => [$d]
+                    }
+                  }
+                | flatten
+              }
+
+              collect-data %s" | explore
+              '';
+            desc = "Open (possibly with merging) file(s) of structured data and view it in nushell's explore pager";
+          }
+        ];
+      };
+    };
   };
 
   programs.zathura = {
@@ -184,6 +221,10 @@
 
   programs.nushell  = {
     enable = true;
+    configFile.text = ''
+      use ${pkgs.nu_scripts}/share/nu_scripts/themes/nu-themes/nord.nu
+      nord set color_config
+    '';
     envFile = {
       text = ''
         $env.config.buffer_editor = "hx"
