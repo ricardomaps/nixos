@@ -1,9 +1,28 @@
 { pkgs, inputs, config, ... }:
-
+let
+  noctalia = cmd: [
+    "noctalia-shell" "ipc" "call"
+  ] ++ (pkgs.lib.splitString " " cmd);
+in
 {
   imports = [
     inputs.noctalia-shell.homeModules.default
   ];
+
+  programs.niri = {
+    settings = {
+      spawn-at-startup = [
+        {
+          command = [ "noctalia-shell" ];
+        }
+      ];
+    };
+    binds = {
+      "Mod+Space" = noctalia "launcher toggle";
+      "Mod+L" = noctalia "lockScreen lock";
+      "Mod+W" = noctalia "";
+    };
+  };
 
   programs.noctalia-shell = {
     enable = true;
