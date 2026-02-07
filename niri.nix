@@ -1,14 +1,7 @@
 {config, lib, pkgs, inputs, ...}:
 
-let
-  noctalia = cmd: [
-    "noctalia-shell" "ipc" "call"
-  ] ++ (pkgs.lib.splitString " " cmd);
-in
-
 {
   imports = [
-    ./noctalia.nix
     inputs.niri.homeModules.niri
   ];
 
@@ -43,35 +36,6 @@ in
       size = 24;
       hide-after-inactive-ms = 5000;
     };
-
-    # layout {
-
-    #     focus-ring {
-    #         active-color   "#8fbcbb"
-    #         inactive-color "#2e3440"
-    #         urgent-color   "#bf616a"
-    #     }
-
-    #     border {
-    #         active-color   "#8fbcbb"
-    #         inactive-color "#2e3440"
-    #         urgent-color   "#bf616a"
-    #     }
-
-    #     shadow {
-    #         color "#00000070"
-    #     }
-
-    #     tab-indicator {
-    #         active-color   "#8fbcbb"
-    #         inactive-color "#326766"
-    #         urgent-color   "#bf616a"
-    #     }
-
-    #     insert-hint {
-    #         color "#8fbcbb80"
-    #     }
-    # }
 
     layout = {
       focus-ring = {
@@ -108,20 +72,15 @@ in
       center-focused-column = "never";
       always-center-single-column = true;
       preset-column-widths = [
-        { proportion = 1. / 3.; }
         { proportion = 1. / 2.; }
         { proportion = 2. / 3.; }
+        { proportion = 1. / 1.; }
       ];
-      default-column-width = { proportion = 0.66667; };
+      default-column-width = { proportion = 1. / 2.; };
       focus-ring = {
         width = 1;
       };
     };
-
-    spawn-at-startup = [
-      { argv = ["noctalia-shell"]; }
-      { argv = ["kitty"]; }
-    ];
 
     hotkey-overlay = {
       skip-at-startup = true;
@@ -164,25 +123,6 @@ in
     screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
     binds = {
-
-      "Mod+Space".action.spawn = noctalia "launcher toggle";
-      "Mod+Ctrl+W".action.spawn = noctalia "wallpaper toggle";
-      "Mod+B".action.spawn = noctalia "bar toggle";
-      "Mod+Ctrl+M".action.spawn = noctalia "launcher emoji";
-      "Mod+Ctrl+C".action.spawn = noctalia "launcher clipboard";
-      "Mod+Ctrl+S".action.spawn = noctalia "sessionMenu toggle";
-
-      "XF86AudioRaiseVolume".action.spawn = noctalia "volume increase";
-      "XF86AudioLowerVolume".action.spawn = noctalia "volume decrease";
-      "XF86AudioMute".action.spawn = noctalia "volume muteOutput";
-      "XF86AudioMicMute".action.spawn = noctalia "volume muteInput";
-
-      "XF86MonBrightnessUp".action.spawn = noctalia "brightness increase";
-      "XF86MonBrightnessDown".action.spawn = noctalia "brightness decrease";
-
-      "Mod+P".action = spawn "fuzzel";
-      "Mod+T".action = spawn "kitty";
-
       "Mod+Shift+Y".action = toggle-overview;
       "Mod+Q".action = close-window;
 
@@ -193,33 +133,21 @@ in
 
       "Mod+Page_Down".action = focus-workspace-down;
       "Mod+Page_Up".action = focus-workspace-up;
-      "Mod+D".action = focus-workspace-down;
-      "Mod+U".action = focus-workspace-up;
 
       "Mod+Shift+Left".action = focus-monitor-left; 
       "Mod+Shift+Down".action = focus-monitor-down; 
       "Mod+Shift+Up".action = focus-monitor-up; 
       "Mod+Shift+Right".action = focus-monitor-right; 
-      "Mod+Shift+N".action = focus-monitor-left; 
-      "Mod+Shift+E".action = focus-monitor-down; 
-      "Mod+Shift+I".action = focus-monitor-up; 
-      "Mod+Shift+O".action = focus-monitor-right; 
 
       "Mod+Shift+Ctrl+Left".action = move-column-to-monitor-left; 
       "Mod+Shift+Ctrl+Down".action = move-column-to-monitor-down; 
       "Mod+Shift+Ctrl+Up".action = move-column-to-monitor-up; 
       "Mod+Shift+Ctrl+Right".action = move-column-to-monitor-right; 
-      "Mod+Shift+Ctrl+N".action = move-column-to-monitor-left; 
-      "Mod+Shift+Ctrl+E".action = move-column-to-monitor-down; 
-      "Mod+Shift+Ctrl+I".action = move-column-to-monitor-up; 
-      "Mod+Shift+Ctrl+O".action = move-column-to-monitor-right; 
 
       "Mod+Y".action = toggle-overview;
 
       "Mod+Ctrl+Page_Down".action = move-column-to-workspace-down;
       "Mod+Ctrl+Page_Up".action = move-column-to-workspace-up;
-      "Mod+Ctrl+D".action = move-column-to-workspace-down;
-      "Mod+Ctrl+U".action = move-column-to-workspace-up;
       # Alternatively, there are commands to move just a single window:
       # Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
 
@@ -259,13 +187,9 @@ in
       # Expel the bottom window from the focused column to the right.
       "Mod+Period".action = expel-window-from-column;
  
-      "Mod+N".action = focus-column-left;
       "Mod+Left".action = focus-column-left;
-      "Mod+O".action = focus-column-right;
       "Mod+Right".action = focus-column-right;
-      "Mod+E".action = focus-window-down;
       "Mod+Down".action = focus-window-down;
-      "Mod+I".action = focus-window-up;
       "Mod+Up".action = focus-window-up;
 
       "Mod+R".action = switch-preset-column-width;
@@ -278,14 +202,9 @@ in
       # Expand the focused column to space not taken up by other fully visible columns.
       # Makes the column "fill the rest of the space".
       "Mod+Ctrl+F".action = expand-column-to-available-width;
-
-      "Mod+Ctrl+N".action = move-column-left;
       "Mod+Ctrl+Left".action = move-column-left;
-      "Mod+Ctrl+O".action = move-column-right;
       "Mod+Ctrl+Right".action = move-column-right;
-      "Mod+Ctrl+E".action = move-window-down;
       "Mod+Ctrl+Down".action = move-window-down;
-      "Mod+Ctrl+I".action = move-window-up;
       "Mod+Ctrl+Up".action = move-window-up;
 
       "Mod+Minus".action = set-column-width "-10%";
@@ -301,11 +220,6 @@ in
       "Alt+Print".action.screenshot-window = {
         
       };
-
-      "Mod+Alt+N".action.spawn = ["niri" "msg" "output" "Chimei Innolux Corporation 0x15DB Unknown" "transform" "normal"];
-      "Mod+Alt+E".action.spawn = ["niri" "msg" "output" "Chimei Innolux Corporation 0x15DB Unknown" "transform" "90"];
-      "Mod+Alt+I".action.spawn = ["niri" "msg" "output" "Chimei Innolux Corporation 0x15DB Unknown" "transform" "180"];
-      "Mod+Alt+O".action.spawn = ["niri" "msg" "output" "Chimei Innolux Corporation 0x15DB Unknown" "transform" "270"];
 
       "Mod+Shift+Delete".action = quit;
     };

@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.dms.nixosModules.greeter
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -61,6 +62,14 @@
 
   # programs.hyprland.enable = true;
   programs.niri.enable = true;
+
+  programs.dank-material-shell.greeter = {
+    enable = true;
+    compositor = {
+      name = "niri";
+    };
+    configHome = "/home/ricmaps";
+  };
  
   services.kanata = {
     package = pkgs.kanata-with-cmd;

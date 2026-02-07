@@ -3,9 +3,9 @@
 {
   imports = [
     ./niri.nix
-    ./noctalia.nix
     ./zen.nix
     ./mango.nix
+    ./dms.nix
   ];
 
   home.username = "ricmaps";
@@ -137,23 +137,33 @@
       opener = {
         nu-explore = [
           {
-            run = ''nu -e "
-              def collect-data [...files] {
-                $files
-                | each { |f|
-                    let d = open $f
-                    match ($d | describe) {
-                      "list" => $d
-                      _      => [$d]
+            run = ''
+              nu -e "
+                def collect-data [...files] {
+                  $files
+                  | each { |f|
+                      let d = open $f
+                      match ($d | describe) {
+                        "list" => $d
+                        _      => [$d]
+                      }
                     }
-                  }
-                | flatten
-              }
+                  | flatten
+                  | explore
+                }
 
-              collect-data %s" | explore
-              '';
+                collect-data %s"
+            '';
             desc = "Open (possibly with merging) file(s) of structured data and view it in nushell's explore pager";
+            block = true;
           }
+        ];
+      };
+      open = {
+        append_rules = [
+          { url = "*.json"; use = "nu-explore"; }
+          { url = "*.toml"; use = "nu-explore"; }
+          { url = "*.yaml"; use = "nu-explore"; }
         ];
       };
     };
