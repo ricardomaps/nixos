@@ -1,13 +1,26 @@
 { pkgs, inputs, config, ... }:
+
 let
   noctalia = cmd: [
     "noctalia-shell" "ipc" "call"
   ] ++ (pkgs.lib.splitString " " cmd);
 in
+
 {
   imports = [
     inputs.noctalia-shell.homeModules.default
   ];
+
+  niri.keybinds = {
+    wallpaper = noctalia "wallpaper toggle";
+    launcher = noctalia "launcher toggle";
+    lock = noctalia "sessionMenu lockAndSuspend";
+    volumeUp = noctalia "volume increase";
+    volumeDown = noctalia "volume decrease";
+    volumeMute = noctalia "volume muteOutput";
+    brightnessUp = noctalia "brightness increase";
+    brightnessDown = noctalia "brightness decrease";
+  };
 
   programs.niri = {
     settings = {
@@ -16,11 +29,11 @@ in
           command = [ "noctalia-shell" ];
         }
       ];
-    };
-    binds = {
-      "Mod+Space" = noctalia "launcher toggle";
-      "Mod+L" = noctalia "lockScreen lock";
-      "Mod+W" = noctalia "";
+      # binds = {
+      #   "Mod+Space".action.spawn = noctalia "launcher toggle";
+      #   "Mod+L".action.spawn = noctalia "lockScreen lock";
+      #   "Mod+W".action.spawn = noctalia "";
+      # };
     };
   };
 

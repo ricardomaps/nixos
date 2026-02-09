@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +36,11 @@
 
     helix = {
       url = "github:mattwparas/helix?ref=steel-event-system";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zjstatus = {
+      url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

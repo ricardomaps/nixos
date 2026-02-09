@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.dms.nixosModules.greeter
+      # inputs.dms.nixosModules.greeter
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,6 +47,11 @@
 
   services.udisks2.enable = true;
 
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
@@ -63,13 +68,13 @@
   # programs.hyprland.enable = true;
   programs.niri.enable = true;
 
-  programs.dank-material-shell.greeter = {
-    enable = true;
-    compositor = {
-      name = "niri";
-    };
-    configHome = "/home/ricmaps";
-  };
+  # programs.dank-material-shell.greeter = {
+  #   enable = true;
+  #   compositor = {
+  #     name = "niri";
+  #   };
+  #   configHome = "/home/ricmaps";
+  # };
  
   services.kanata = {
     package = pkgs.kanata-with-cmd;

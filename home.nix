@@ -1,11 +1,12 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, osConfig, lib, ... }:
 
 {
   imports = [
+    inputs.nix-index-database.homeModules.default
     ./niri.nix
     ./zen.nix
     ./mango.nix
-    ./dms.nix
+    ./noctalia.nix
   ];
 
   home.username = "ricmaps";
@@ -30,10 +31,41 @@
     gtk.enable = true;
   };
 
+  programs.nix-index-database.comma.enable = true;
+  programs.nix-index = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
   services.udiskie = {
     enable = true;
   };
 
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings =
+      let
+        syncthingFolder = "${config.home.homeDirectory}/syncthing";
+        prefixFolders = lib.mapAttrs' (folder: value: { name = "${syncthingFolder}/${folder}"; inherit value; });
+      in
+      {
+        folders = prefixFolders {
+          "images" = {
+            id = "nufmf-ald5l";
+            devices = ["phone"];
+          };
+        };
+
+        devices = {
+          phone = {
+            id = "HWK73AK-GBY7KR4-E3RZPGI-AHEUO5C-XAHCAY5-QPXWY6M-QWQCRJW-UCI5SAZ";
+          };
+        };
+      };
+  };
+  
   programs.quickshell = {
     enable = true;
   };
@@ -66,7 +98,11 @@
     enableZshIntegration = true;
   };
 
-  programs.zellij = {
+  programs.zellij =
+  let
+    zjstatus = inputs.zjstatus.packages."x86_64-linux".default;
+  in
+  {
     enable = true;
     # i don't know how to make this work :(
     # 
@@ -76,14 +112,54 @@
     #     "--features" "plugins_from_target,vendored_curl"
     #   ];
     # });
-    enableZshIntegration = true;
     settings = {
       theme = "nord";
       pane_frames = false;
+      show_startup_tips = false;
+      default_layout = "disable_status_bar";
     };
-    extraConfig = ''
-      show_startup_tips false
-    '';
+    # layouts = {
+    #   default = ''
+    #       layout {
+    #         default_tab_template {
+    #             children
+    #             pane size=2 borderless=true {
+    #                 plugin location="file:${zjstatus}/bin/zjstatus.wasm" {
+    #                     format_left   "{mode} #[fg=#88C0D0,bold]{session}"
+    #                     format_center "{tabs}"
+    #                     format_right  "{command_git_branch} {datetime}"
+    #                     format_space  ""
+
+    #                     border_enabled  "true"
+    #                     border_char     "─"
+    #                     border_format   "#[fg=#6C7086]{char}"
+    #                     border_position "top"
+
+    #                     hide_frame_for_single_pane "true"
+    #                     hide_frame_except_for_fullscreen "true"
+    #                     hide_frame_except_for_search "true"
+    #                     hide_frame_except_for_scroll "true"
+
+    #                     mode_normal  "#[bg=blue] "
+    #                     mode_tmux    "#[bg=#ffc387] "
+
+    #                     tab_normal   "#[fg=#81A1C1] {name} "
+    #                     tab_active   "#[fg=#8FBCBB,bold,italic] {name} "
+
+    #                     command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+    #                     command_git_branch_format      "#[fg=blue] {stdout} "
+    #                     command_git_branch_interval    "10"
+    #                     command_git_branch_rendermode  "static"
+
+    #                     datetime        "#[fg=#5E81AC,bold] {format} "
+    #                     datetime_format "%A, %d %b %Y %H:%M"
+    #                     datetime_timezone "${osConfig.time.timeZone}"
+    #                 }
+    #             }
+    #         }
+    #     }
+    #   '';
+    # };
   };
 
   programs.fastfetch = {
@@ -188,6 +264,7 @@
         };
       };
       editor = {
+        auto-save = true;
         cursor-shape = {
           normal = "block";
           insert = "bar";
@@ -199,7 +276,10 @@
             insert = "INSERT";
             select = "SELECT";
           };
+          left = ["mode" "spacer" "version-control" "read-only-indicator" "file-name" "file-modification-indicator"];
+          right = ["diagnostics" "position" "position-percentage"];
         };
+        soft-wrap.enable = true;
         line-number = "relative";
         color-modes = true;
         bufferline = "multiple";
@@ -263,17 +343,18 @@
         };
         size = 12;
       };
-
       mouse = {
         hide_when_typing = true;
       };
-
       selection = {
         save_to_clipboard = true;
       };
-
       window = {
         opacity = 0.9;
+      };
+      terminal.shell = {
+        program = "zellij";
+        args = ["-l" "welcome"];
       };
     };
   };
