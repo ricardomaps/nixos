@@ -354,8 +354,8 @@
         normal = {
           "X" = ["extend_line_up" "extend_to_line_bounds"];
           "g" = {
-            "o" = "goto_line_end";
-            "n" = "goto_line_start";
+            "right" = "goto_line_end";
+            "left" = "goto_line_start";
           };
         };
       };
