@@ -63,6 +63,10 @@
             id = "HWK73AK-GBY7KR4-E3RZPGI-AHEUO5C-XAHCAY5-QPXWY6M-QWQCRJW-UCI5SAZ";
           };
         };
+
+        options = {
+          urAccepted = -1;
+        };
       };
   };
   
@@ -98,11 +102,7 @@
     enableZshIntegration = true;
   };
 
-  programs.zellij =
-  let
-    zjstatus = inputs.zjstatus.packages."x86_64-linux".default;
-  in
-  {
+  programs.zellij = {
     enable = true;
     # i don't know how to make this work :(
     # 
@@ -118,48 +118,144 @@
       show_startup_tips = false;
       default_layout = "disable_status_bar";
     };
-    # layouts = {
-    #   default = ''
-    #       layout {
-    #         default_tab_template {
-    #             children
-    #             pane size=2 borderless=true {
-    #                 plugin location="file:${zjstatus}/bin/zjstatus.wasm" {
-    #                     format_left   "{mode} #[fg=#88C0D0,bold]{session}"
-    #                     format_center "{tabs}"
-    #                     format_right  "{command_git_branch} {datetime}"
-    #                     format_space  ""
+    extraConfig = ''
+      keybinds {
+        shared {
+            // Use original Zellij keybinding but with Ctrl+Alt modifier
+            // Original: Ctrl+O, now: Ctrl+Alt+O to avoid Helix conflicts
+            unbind "Ctrl o"
+            bind "Ctrl Alt o" { SwitchToMode "Session"; }
 
-    #                     border_enabled  "true"
-    #                     border_char     "─"
-    #                     border_format   "#[fg=#6C7086]{char}"
-    #                     border_position "top"
+            // Use original Zellij keybinding but with Ctrl+Alt modifier
+            // Original: Ctrl+S, now: Ctrl+Alt+S to avoid Helix conflicts
+            unbind "Ctrl s"
+            bind "Ctrl Alt s" { SwitchToMode "Scroll"; }
 
-    #                     hide_frame_for_single_pane "true"
-    #                     hide_frame_except_for_fullscreen "true"
-    #                     hide_frame_except_for_search "true"
-    #                     hide_frame_except_for_scroll "true"
+            // Previously: Alt + i (in helix: shrink_selection)
+            unbind "Alt i"
+            // Move tab left (new)
+            bind "Alt Shift Left" { MoveTab "Left"; }
 
-    #                     mode_normal  "#[bg=blue] "
-    #                     mode_tmux    "#[bg=#ffc387] "
+            // Previously: Alt + o (in helix: expand_selection)
+            unbind "Alt o"
+            // Move tab right (new)
+            bind "Alt Shift L" { MoveTab "Right"; }
 
-    #                     tab_normal   "#[fg=#81A1C1] {name} "
-    #                     tab_active   "#[fg=#8FBCBB,bold,italic] {name} "
+            // Previously: Alt + n (in helix: select_next_sibling)
+            bind "Alt m" { NewPane; }
+            unbind "Alt n"
 
-    #                     command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-    #                     command_git_branch_format      "#[fg=blue] {stdout} "
-    #                     command_git_branch_interval    "10"
-    #                     command_git_branch_rendermode  "static"
+            // Previously: Ctrl + b (in helix: move_page_up)
+            // Alt+number: Go directly to tab 1-9 (tmux style)
+            bind "Alt 1" { GoToTab 1; }
+            bind "Alt 2" { GoToTab 2; }
+            bind "Alt 3" { GoToTab 3; }
+            bind "Alt 4" { GoToTab 4; }
+            bind "Alt 5" { GoToTab 5; }
+            bind "Alt 6" { GoToTab 6; }
+            bind "Alt 7" { GoToTab 7; }
+            bind "Alt 8" { GoToTab 8; }
+            bind "Alt 9" { GoToTab 9; }
 
-    #                     datetime        "#[fg=#5E81AC,bold] {format} "
-    #                     datetime_format "%A, %d %b %Y %H:%M"
-    #                     datetime_timezone "${osConfig.time.timeZone}"
-    #                 }
-    #             }
-    #         }
-    #     }
-    #   '';
-    # };
+            // Not a remap, just for ease of use
+            bind "Alt Shift f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+
+            // Alt+q/w: Walk (focus) left/right between tabs
+            bind "Alt q" { GoToPreviousTab; }
+            bind "Alt w" { GoToNextTab; }
+
+            // Unbind Alt+( and Alt+)
+            // fixes selection cycling in helix for alacritty and wezterm
+            // does not work for kitty or ghostty
+            unbind "Alt ("
+            unbind "Alt )"
+
+            // Unbind Alt+p and Alt+Shift+p to avoid conflicts with Helix (select_previous_sibling)
+            // Original: Alt+p for TogglePaneInGroup, Alt+Shift+p for ToggleGroupMarking
+            // Rebind to Ctrl+Alt+p for pane grouping actions
+            unbind "Alt p"
+            unbind "Alt Shift p"
+            bind "Ctrl Alt p" { TogglePaneInGroup; }
+            bind "Ctrl Alt Shift p" { ToggleGroupMarking; }
+
+            // Yazelix command palette (yzx menu) in a floating pane
+            bind "Alt Shift m" {
+                Run "nu" "~/.config/yazelix/configs/zellij/scripts/yzx_menu_popup.nu" {
+                    name "yzx_menu"
+                    floating true
+                    close_on_exit true
+                    x "15%"
+                    y "15%"
+                    width "70%"
+                    height "70%"
+                }
+            }
+        }
+
+        shared_except "pane" "locked" {
+            bind "Ctrl p" { SwitchToMode "Pane"; }
+        }
+  
+        shared_except "resize" "locked" {
+            bind "Ctrl n" { SwitchToMode "Resize"; }
+        }
+  
+        shared_except "scroll" "locked" {
+            unbind "Ctrl s"
+            bind "Ctrl Alt s" { SwitchToMode "Scroll"; }
+        }
+  
+        shared_except "session" "locked" {
+            unbind "Ctrl o"
+            bind "Ctrl Alt o" { SwitchToMode "Session"; }
+        }
+  
+        shared_except "tab" "locked" {
+            bind "Ctrl t" { SwitchToMode "Tab"; }
+        }
+  
+        shared_except "move" "locked" {
+            bind "Ctrl h" { SwitchToMode "Move"; }
+        }
+  
+        shared_except "locked" {
+            unbind "Ctrl b"
+        }
+
+        shared_except "locked" {
+            bind "Ctrl q" { Quit; }
+        }
+
+        pane {
+            bind "Ctrl p" { SwitchToMode "Normal"; }
+        }
+
+        resize {
+            bind "Ctrl n" { SwitchToMode "Normal"; }
+        }
+
+        session {
+            // Exit session mode
+            unbind "Ctrl o"
+            bind "Ctrl Alt o" { SwitchToMode "Normal"; }
+        }
+
+        scroll {
+            // Exit scroll mode
+            unbind "Ctrl s"
+            bind "Ctrl Alt s" { SwitchToMode "Normal"; }
+        }
+
+        tab {
+            bind "Ctrl t" { SwitchToMode "Normal"; }
+        }
+
+        move {
+            bind "Ctrl h" { SwitchToMode "Normal"; }
+        }
+
+    }
+  '';
   };
 
   programs.fastfetch = {

@@ -23,8 +23,8 @@
           youtube = {
             name = "YouTube";
             urls = lib.singleton {
-                template = "https://www.youtube.com/results";
-                params = lib.attrsToList { "search_query" = "{searchTerms}"; };
+                template = "https://www.youtube.com/results?search_query={searchTerms}";
+                # params = lib.attrsToList { "search_query" = "{searchTerms}"; };
               };
             definedAliases = ["@yt"];
           };
@@ -33,9 +33,18 @@
             name = "MyNixOS";
             urls = lib.singleton {
                 template = "https://mynixos.com/search";
-                params = lib.attrsToList { "query" = "{searchTerms}"; };
+                params = lib.attrsToList { "q" = "{searchTerms}"; };
               };
             definedAliases = ["@nx"];
+          };
+
+          rustdocs = {
+            name = "Docs.rs";
+            urls = lib.singleton {
+              template = "https://docs.rs/releases/search?query={searchTerms}";
+              # params = lib.attrsToList { "query" = "{searchTerms}"; };
+            };
+            definedAliases = ["@rs"];
           };
         };
       };
