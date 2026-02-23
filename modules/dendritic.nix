@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.den.flakeModules.dendritic
+    inputs.den.flakeModules.default
   ];
 }
