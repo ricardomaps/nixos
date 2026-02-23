@@ -1,27 +1,21 @@
-{ config, lib, ...}:
-
 {
-  imports = [
-    ./waybar.nix
-  ];
-
-  options = {
-    wms.hyprland.enable = lib.mkEnableOption "enables hyprland window manager";
-  };
-
-  config = lib.mkIf config.wms.hyprland.enable {
-    programs.hyprshot.enable = true;
+  den.aspects.ricmaps = {
+    imports = [
+      ./waybar.nix
+    ];
+    
+    programs.hyprshot.enable = false;
 
     services.swww = {
-      enable = true;
+      enable = false;
     };
 
     programs.wofi = {
-      enable = true;
+      enable = false;
     };
 
     wayland.windowManager.hyprland = {
-      enable = true;
+      enable = false;
       settings = {
         monitor = ",preferred,auto,auto";
         exec-once = "waybar & swww-daemon";
