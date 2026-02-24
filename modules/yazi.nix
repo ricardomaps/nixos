@@ -4,8 +4,13 @@
   {
     programs.yazi = {
       enable = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
       flavors = {
         nord = pkgs.yaziPlugins.nord;
+      };
+      plugins = {
+        inherit (pkgs.yaziPlugins) chmod smart-enter git sudo;
       };
       theme = {
         flavor = {
