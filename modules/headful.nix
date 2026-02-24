@@ -62,8 +62,6 @@
   
     services.blueman.enable = true;
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
-
     programs.zsh.enable = true;
 
     # fonts
@@ -100,7 +98,5 @@
     };
 
     security.polkit.enable = true;
-
-    nixpkgs.config.allowUnfree = true;
   };
 }
