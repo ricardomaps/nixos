@@ -2,7 +2,7 @@
   den.aspects.ricmaps.homeManager =
   {
     home.shellAliases = {
-      nr = "sudo nixos-rebuild --flake /etc/nixos";
+      nr = "sudo nixos-rebuild switch --flake /etc/nixos";
       nb = "nix build";
       ne = "nix edit";
       nd = "nix develop";
