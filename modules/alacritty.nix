@@ -1,6 +1,6 @@
-{ pkgs, ... }:
 {
-  den.aspects.dev.homeManager =
+  den.aspects.ricmaps.homeManager =
+  { pkgs, ... }:
   {
     programs.alacritty = {
       enable = true;
@@ -9,7 +9,7 @@
       });
       theme = "nord";
       settings = {
-        shell = {
+        terminal.shell = {
           program = "zellij";
           args = ["-l" "welcome"];
         };

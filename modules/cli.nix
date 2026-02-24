@@ -1,5 +1,5 @@
 {
-  den.aspects.dev.homeManager = {
+  den.aspects.ricmaps.homeManager = {
     programs.direnv = {
       enable = true;
       enableZshIntegration = true;

@@ -44,7 +44,6 @@
               name = "Docs.rs";
               urls = lib.singleton {
                 template = "https://docs.rs/releases/search?query={searchTerms}";
-                # params = lib.attrsToList { "query" = "{searchTerms}"; };
               };
               definedAliases = ["@rs"];
             };
