@@ -50,11 +50,6 @@
       };
     };
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-    };
-
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
     hardware.keyboard.qmk.enable = true;
