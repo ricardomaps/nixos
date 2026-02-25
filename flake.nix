@@ -23,10 +23,6 @@
       url = "github:nix-community/home-manager";
     };
     import-tree.url = "github:vic/import-tree";
-    librepods = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:demenik/librepods";
-    };
     mango = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:DreamMaoMao/mangowc";
