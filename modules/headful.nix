@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   den.aspects.headful.nixos =
   { pkgs, ... }:
@@ -82,6 +83,15 @@
     environment.shells = with pkgs;[
       nushell
     ];
+
+    system.autoUpgrade = {
+      enable = true;
+      flake = inputs.self.outPath;
+      flags = [
+        "--print-build-logs"
+      ];
+      dates = "02:00";
+    };
 
     documentation = {
       dev.enable = true;
