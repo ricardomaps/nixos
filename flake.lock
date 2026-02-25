@@ -52,6 +52,21 @@
         "type": "github"
       }
     },
+    "flake-file": {
+      "locked": {
+        "lastModified": 1771968394,
+        "narHash": "sha256-YhWlYe71OfOgi3zuykqYxw5O3dVkPH6QcgLiAA/V/R8=",
+        "owner": "vic",
+        "repo": "flake-file",
+        "rev": "6772f79cc48ab78c30970050fe2cb17b523fb640",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "flake-file",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -406,6 +421,7 @@
         "den": "den",
         "firefox-addons": "firefox-addons",
         "flake-aspects": "flake-aspects",
+        "flake-file": "flake-file",
         "flake-parts": "flake-parts",
         "helix": "helix",
         "home-manager": "home-manager",
