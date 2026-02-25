@@ -1,5 +1,5 @@
 {
-  den.aspects.headfult.nixos =
+  den.aspects.headful.nixos =
   { pkgs, ... }:
   {
     services.qbittorrent = {
