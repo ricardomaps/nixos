@@ -18,6 +18,7 @@
         fallback = true;
         connect-timeout = 5;
         experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
+        trusted-users = [ "ricmaps" ];
       };
     };
 
