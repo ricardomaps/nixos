@@ -103,24 +103,6 @@
         "type": "github"
       }
     },
-    "flake-utils": {
-      "inputs": {
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "helix": {
       "inputs": {
         "nixpkgs": [
@@ -195,27 +177,6 @@
       "original": {
         "owner": "vic",
         "repo": "import-tree",
-        "type": "github"
-      }
-    },
-    "librepods": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1759662487,
-        "narHash": "sha256-wFK3xySPGxAZ0g00msurLlG8jA0X4nv0yAEVsnniHlI=",
-        "owner": "demenik",
-        "repo": "librepods",
-        "rev": "fd5a9329157e679c9e66ac490320df1840076e4b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "demenik",
-        "repo": "librepods",
         "type": "github"
       }
     },
@@ -426,7 +387,6 @@
         "helix": "helix",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
-        "librepods": "librepods",
         "mango": "mango",
         "niri": "niri",
         "nix-flatpak": "nix-flatpak",
@@ -475,21 +435,6 @@
       "original": {
         "owner": "wlrfx",
         "repo": "scenefx",
-        "type": "github"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
         "type": "github"
       }
     },
