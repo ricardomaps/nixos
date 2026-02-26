@@ -34,23 +34,6 @@
       };
     };
 
-    services.kanata = {
-      package = pkgs.kanata-with-cmd;
-      enable = true;
-      keyboards = {
-        internalKeyboard = {
-          devices = [
-            "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-          ];
-          extraDefCfg = ''
-            process-unmapped-keys yes
-            danger-enable-cmd yes
-          '';
-          configFile = ./kanata.kbd;
-        };
-      };
-    };
-
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
     hardware.keyboard.qmk.enable = true;
@@ -60,13 +43,13 @@
     programs.zsh.enable = true;
 
     # fonts
-    fonts.packages = with pkgs; [
-      nerd-fonts.iosevka
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-mono
-      source-code-pro
-    ];
-
+    fonts = {
+      enableDefaultPackages = true;
+      packages = with pkgs; [
+        nerd-fonts.fira-mono
+        linja-sike
+      ];
+    };
 
     environment.systemPackages = with pkgs; [
       brightnessctl
