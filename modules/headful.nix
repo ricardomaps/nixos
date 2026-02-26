@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   den.aspects.headful.nixos =
-  { pkgs, ... }:
+  { pkgs, lib, ... }:
   {
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -79,6 +79,8 @@
       unzip
       usbutils
     ];
+
+    environment.defaultPackages = lib.mkForce [ ];
 
     environment.shells = with pkgs;[
       nushell
