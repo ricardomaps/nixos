@@ -1,19 +1,21 @@
 {
   den.aspects.ricmaps = {
-    homeManager.services.espanso = {
-      enable = true;
-      x11Support = true;
-      waylandSupport = true;
-    };
-
-    nixos =
+    homeManager =
     { pkgs, ... }:
     {
       i18n.inputMethod = {
         enable = true;
-        type = "ibus";
-        ibus.engines = with pkgs.ibus-engines; [ uniemoji typing-booster table ];
+        type = "fcitx5";
+        fcitx5 = {
+          addons = with pkgs; [
+            fcitx5-nord
+            fcitx5-table-extra
+            fcitx5-table-other
+          ];
+          waylandFrontend = true;
+        };
       };
     };
   };
 }
+
