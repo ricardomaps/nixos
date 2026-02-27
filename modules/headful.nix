@@ -14,11 +14,6 @@
     i18n.defaultLocale = "en_US.UTF-8";
     services.printing.enable = false;
 
-    services.power-profiles-daemon.enable = true;
-    services.upower.enable = true;
-
-    services.udisks2.enable = true;
-
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;
