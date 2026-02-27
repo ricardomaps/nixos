@@ -14,7 +14,7 @@
 
     environment.systemPackages = with pkgs; [
       nix-tree
-      nix-nix-inspect
+      nix-inspect
       nix-init
       nix-update
       nurl
