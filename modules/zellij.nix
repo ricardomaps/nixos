@@ -1,22 +1,21 @@
 {
   den.aspects.ricmaps.homeManager =
+  { pkgs, lib, ... }:
   {
     programs.zellij = {
       enable = true;
-      # i don't know how to make this work :(
-      # 
-      # package = pkgs.zellij.overrideAttrs (prev: {
-      #   cargoBuildFlags = (prev.cargoBuildFlags or []) ++ [
-      #     "--no-default-features"
-      #     "--features" "plugins_from_target,vendored_curl"
-      #   ];
-      # });
+
+      package = pkgs.zellij.overrideAttrs (prev: {
+          cargoBuildFeatures = lib.remove "web_server_capability" (prev.cargoBuildFeatures or [ ]);
+      });
+
       settings = {
         theme = "nord";
         pane_frames = false;
         show_startup_tips = false;
         default_layout = "disable_status_bar";
       };
+
       extraConfig = ''
         keybinds {
           shared {
