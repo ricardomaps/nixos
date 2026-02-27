@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake-file.inputs = {
     nix-index-database = {
@@ -7,6 +8,8 @@
   };
   
   den.aspects.headful.nixos = {
+    imports = [inputs.nix-index-database.nixosModules.nix-index];
+    programs.nix-index-database.comma.enable = true;
     nix = {
       gc = {
         automatic = true;
