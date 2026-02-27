@@ -9,8 +9,7 @@
         fcitx5 = {
           addons = with pkgs; [
             fcitx5-nord
-            fcitx5-table-extra
-            fcitx5-table-other
+            qt6Packages.fcitx5-chinese-addons
           ];
           waylandFrontend = true;
         };
