@@ -8,8 +8,8 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    networking.hostName = "headful"; # Define your hostname.
-    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networking.hostName = "headful";
+    networking.networkmanager.enable = true;
     time.timeZone = "America/Fortaleza";
     i18n.defaultLocale = "en_US.UTF-8";
     services.printing.enable = false;
