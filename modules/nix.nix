@@ -7,8 +7,21 @@
     };
   };
   
-  den.aspects.headful.nixos = {
+  den.aspects.headful.nixos =
+  { pkgs, ... }:
+  {
     imports = [inputs.nix-index-database.nixosModules.nix-index];
+
+    environment.systemPackages = with pkgs; [
+      nix-tree
+      nix-nix-inspect
+      nix-init
+      nix-update
+      nurl
+      vulnix
+      statix
+    ];
+
     programs.nix-index-database.comma.enable = true;
     nix = {
       gc = {
