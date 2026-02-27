@@ -47,7 +47,7 @@
       enableDefaultPackages = true;
       packages = with pkgs; [
         nerd-fonts.fira-mono
-        linja-sike
+        nasin-nanpa
       ];
     };
 
