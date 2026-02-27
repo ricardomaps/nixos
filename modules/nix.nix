@@ -23,6 +23,7 @@
     ];
 
     programs.nix-index-database.comma.enable = true;
+
     nix = {
       gc = {
         automatic = true;
@@ -36,6 +37,10 @@
         experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
         trusted-users = [ "ricmaps" ];
       };
+    };
+
+    programs.nix-ld = {
+      enable = true;
     };
 
     nixpkgs.config.allowUnfree = true;
