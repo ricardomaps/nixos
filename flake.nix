@@ -41,6 +41,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:noctalia-dev/noctalia-shell";
     };
+    swc = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "path:../../../home/ricmaps/swc";
+    };
     zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:0xc000022070/zen-browser-flake";
