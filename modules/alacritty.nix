@@ -14,9 +14,12 @@
           args = ["-l" "welcome"];
         };
         font = {
+          # normal = {
+          #   family = "Fira Mono Nerd Font";
+          #   style = "Regular";
+          # };
           normal = {
-            family = "Fira Mono Nerd Font";
-            style = "Regular";
+            family = "nasin-nanpa";
           };
           size = 12;
         };

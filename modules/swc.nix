@@ -1,18 +1,11 @@
-{ inputs, ... }:
 {
-  flake-file.inputs = {
-    swc = {
-      url = "path:./packages/swc";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   den.aspects.ricmap.nixos =
   { pkgs, ... }:
   {
     nixpkgs.overlays = [
       (final: prev: {
-        swc = inputs.swc.packages."x86_64-linux".default;
+        wld = final.callPackage ../packages/wld/default.nix {};
+        swc = final.callPackage ../packages/swc/default.nix {};
       })
     ];
 

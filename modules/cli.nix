@@ -12,10 +12,18 @@
       enableNushellIntegration = true;
     };
   
-    programs.fastfetch = {
+    programs.hyfetch = {
       enable = true;
+      settings = {
+        preset = "rainbow";
+        mode = "rgb";
+        backend = "macchina";
+        flag = "trans";
+        color_align.mode = "horizontal";
+        pride_month_disable = false;
+      };
     };
-
+    
     programs.tealdeer = {
       enable = true;
     };
