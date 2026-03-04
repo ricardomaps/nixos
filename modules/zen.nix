@@ -60,6 +60,14 @@
               definedAliases = ["@np"];
             };
 
+            noogle = {
+              name = "Noogle";
+              urls = lib.singleton {
+                template = "https://noogle.dev/q?term={searchTerms}";
+              };
+              definedAliases = ["@no"];
+            };
+
             rustdocs = {
               name = "Docs.rs";
               urls = lib.singleton {
@@ -73,11 +81,11 @@
         spaces = {
           "Doom" = {
             id = "c258e389-9a7b-4d75-bfe0-408ab1b92219";
-            position = 2000;
+            position = 1000;
           };
           "Research" = {
             id = "44fd5416-49a7-4645-88bf-6776b3319129";
-            position = 3000;
+            position = 2000;
           };
         };
 
@@ -87,33 +95,39 @@
             id = "22b18904-c0c2-4122-9732-e54635c258e0";
             url = "https://chatgpt.com";
             workspace = spaces.Research.id;
+            position = 101;
           };
           "Claude" = {
             id = "44fd5416-49a7-4645-88bf-6776b3319129";
             url = "https://claude.ai/";
             workspace = spaces.Research.id;
+            position = 102;
           };
           "Bluesky" = {
             id = "2986bec7-4461-451e-b3b0-5c8df67f1110";
             url = "https://bsky.app/";
             workspace = spaces.Doom.id;
+            position = 201;
           };
           "Discord" = {
             id = "e8503f35-9e3e-49a3-8a7b-02ecb7e559ed";
             url = "https://discord.com";
             workspace = spaces.Doom.id;
+            position = 202;
         
           };
           "Reddit" = {
             id = "a35d0a6a-b5a7-4627-a86a-cb520003b889";
             url = "https://reddit.com";
             workspace = spaces.Doom.id;
+            position = 203;
           
           };
           "Youtube" = {
             id = "d3ac5d6f-9acb-4598-aa35-a7c3debe0836";
             url = "https://youtube.com";
             workspace = spaces.Doom.id;
+            position = 204;
           };
         };
       };
