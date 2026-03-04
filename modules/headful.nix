@@ -78,7 +78,7 @@
       doc.enable = true;
       info.enable = true;
       man.enable = true;
-      man.generateCaches = true;
+      man.cache.enable = true;
     };
 
     security.polkit.enable = true;
