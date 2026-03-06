@@ -17,6 +17,11 @@
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;
+      theme = pkgs.sddm-astronaut.override {
+        themeConfig = {
+          Background = "~/Pictures/Wallpapers/wallhaven-21z859.jpg";
+        };
+      };
     };
 
     services.pipewire = {
