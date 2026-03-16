@@ -1,5 +1,5 @@
 {
-  den.aspects.headful.nixos =
+  den.aspects.ricmaps.nixos =
   let theme = "lone";
   in
   { pkgs, ... }:
@@ -28,7 +28,9 @@
       # It's still possible to open the bootloader list by pressing any key
       # It will just not appear on screen unless a key is pressed
       loader.timeout = 0;
-
+      loader.systemd-boot.enable = true;
+      loader.efi.canTouchEfiVariables = true;
+      kernelPackages = pkgs.linuxPackages_latest;
     };
   };
 }

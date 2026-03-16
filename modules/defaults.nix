@@ -1,6 +1,9 @@
 { den, ... }: {
   den.default = {
-    includes = [ den._.define-user ]; # Sets users.users.<name>, home.username, and home.homeDirectory automatically
+    includes = [
+      den._.define-user
+      den._.hostname
+    ];
     nixos.system.stateVersion = "25.05";
     homeManager.home.stateVersion = "25.11";
   };

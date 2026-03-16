@@ -1,5 +1,5 @@
 {
-  den.aspects.headful.nixos =
+  den.aspects.ricmaps.nixos =
   { pkgs, ... }:
   {
     services.kanata = {
