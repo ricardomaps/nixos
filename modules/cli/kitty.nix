@@ -1,6 +1,6 @@
 {
   den.aspects.ricmaps.homeManager.programs.kitty = {
-    enable = false;
+    enable = true;
     themeFile = "Nord";
     settings = {
       enable_audio_bell = false;

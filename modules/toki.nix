@@ -15,6 +15,9 @@
         };
       };
     };
+    nixos = {
+      services.espanso.enable = true;
+    };
   };
 }
 

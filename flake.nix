@@ -6,6 +6,10 @@
   outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
+    agenix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ryantm/agenix";
+    };
     den.url = "github:vic/den";
     firefox-addons = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +18,10 @@
     flake-aspects.url = "github:vic/flake-aspects";
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    halloy-theme = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ricardomaps/halloy-theme.nix";
+    };
     helix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:helix-editor/helix";
@@ -26,6 +34,10 @@
     mango = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:DreamMaoMao/mangowc";
+    };
+    neu-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ricardomaps/neu-nix";
     };
     niri = {
       inputs.nixpkgs.follows = "nixpkgs";

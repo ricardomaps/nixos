@@ -1,5 +1,5 @@
 {
-  den.aspects.ricmaps.nixos = {
+  den.aspects.headless.nixos = {
     programs.virt-manager.enable = true;
     users.groups.libvirtd.members = [ "ricmaps" ];
     virtualisation.libvirtd.enable = true;

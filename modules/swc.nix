@@ -1,21 +1,27 @@
+{ inputs, ... }:
 {
-  den.aspects.ricmap.nixos =
+  flake-file.inputs = {
+    neu-nix = {
+      url = "github:ricardomaps/neu-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  den.aspects.ricmaps.nixos =
   { pkgs, ... }:
   {
     nixpkgs.overlays = [
-      (final: prev: {
-        wld = final.callPackage ../packages/wld/default.nix {};
-        swc = final.callPackage ../packages/swc/default.nix {};
-      })
+      inputs.neu-nix.overlays.default
+    ]
+    ;
+    environment.systemPackages = with pkgs; [
+      shko
+      hevel
+      neumenu
+      hack
+      swall
+      swiv
+      swclock
+      mojito
     ];
-
-    environment.systemPackages = [ pkgs.swc ];
-
-    security.wrappers.swc-launch = {
-      source = "${pkgs.swc}/bin/swc-launch";
-      owner = "root";
-      group = "root";
-      setuid = true;
-    };
   };
 }

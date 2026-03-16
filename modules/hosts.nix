@@ -1,3 +1,7 @@
 {
-  den.hosts.x86_64-linux.headful.users.ricmaps.classes = [ "homeManager" ];
+  den.hosts.x86_64-linux.headful = {
+    users.ricmaps = {
+      classes = [ "homeManager" ];
+    };
+  };
 }

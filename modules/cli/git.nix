@@ -5,7 +5,7 @@
       signing = {
         signByDefault = true;
         format = "ssh";
-        key = "~/.ssh/git";
+        key = "~/.ssh/github.com";
       };
       settings = {
         user.name = "ricmaps"; 

@@ -5,13 +5,13 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.ricmaps.homeManager = {
-    imports = [ inputs.agenix.homeManagerModules.default ];
-    age = {
-      identityPaths = ["~/.ssh/id_ed25519"];
-      secrets = {
+  # den.aspects.ricmaps.nixos = {
+  #   imports = [ inputs.agenix.homeManagerModules.default ];
+  #   age = {
+  #     identityPaths = ["~/.ssh/id_ed25519"];
+  #     secrets = {
         
-      };
-    };
-  };
+  #     };
+  #   };
+  # };
 }

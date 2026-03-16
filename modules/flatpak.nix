@@ -3,7 +3,7 @@
 
   flake-file.inputs.nix-flatpak.url = "github:gmodena/nix-flatpak";
   
-  den.aspects.headful.nixos = {
+  den.aspects.common.nixos = {
     imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
     services.flatpak = {
