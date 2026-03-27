@@ -21,7 +21,6 @@
       swall
       swiv
       swclock
-      mojito
     ];
   };
 }

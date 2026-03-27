@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake-file.inputs = {
     impermanence = {
@@ -9,6 +10,10 @@
   den.aspects.headless.nixos =
   { lib, ... }:
   {
+    imports = [
+      inputs.impermanence.nixosModules.default
+    ];
+
     boot.initrd.postResumeCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
       mount /dev/root_vg/root /btrfs_tmp
