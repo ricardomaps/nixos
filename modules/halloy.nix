@@ -16,12 +16,49 @@
       };
       settings = {
         theme = "Nord";
+        actions.buffer = {
+          click_channel_name = "replace-pane";
+          click_highlight = "new-pane";
+          click_username = "new-pane";
+          join_channel = "replace-pane";
+          message_channel = "replace-pane";
+          message_user = "new-pane";
+          local = "replace-pane";
+        };
+        actions.sidebar = {
+          buffer = "replace-pane";
+        };
+        buffer = {
+          server_messages.topic.enabled = false;
+          channel.topic_banner = {
+            enabled = true;
+            max_lines = 2;
+          }
+          text_input = "all"; # allows to use markdown and token based formatting
+        }
+        font = {
+          family = "Fira Mono Nerd Font";
+          size = "16";
+        }
+        highlights = {
+          match = [
+            {
+              words = ["neu-nix" "nix"];
+              case_insensitive = true;
+              exclude = "all";
+              include = { channels = ["#derive"]; };
+            }
+          ];
+        };
         servers = {
           liberachat = {
             channels = [
               "#halloy"
+              "#river"
             ];
-            nickname = "ricmaps";
+            nickname = "ricardomaps";
+            alt_nicks = ["ricmaps"];
+            realname = "Ricardo Mapurunga Junior"
             server = "irc.libera.chat";
           };
           oftc = {
@@ -29,14 +66,18 @@
               "#home-manager"
             ];
             server = "irc.oftc.net";
-            nickname = "ricmaps";
+            nickname = "ricardomaps";
+            alt_nicks = ["ricmaps"];
+            realname = "Ricardo Mapurunga Junior"
           };
           ergo = {
             channels = [
               "#derive"
             ];
             server = "irc.ergo.chat";
-            nickname = "ricmaps";
+            nickname = "ricardomaps";
+            alt_nicks = ["ricmaps"];
+            realname = "Ricardo Mapurunga Junior"
           };
         };
       };
