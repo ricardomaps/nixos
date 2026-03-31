@@ -8,6 +8,10 @@
   den.aspects.ricmaps.homeManager =
   { pkgs, ...}:
   {
+    home.packages = [
+      pkgs.wl-clipboard
+    ];
+
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;
