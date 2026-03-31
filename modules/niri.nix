@@ -7,8 +7,13 @@
 
   den.aspects.ricmaps =
   {
-    nixos = {
+    nixos =
+    { pkgs, ... }:
+    {
       programs.niri.enable = true;
+      environment.systemPackages = [
+        pkgs.xwayland-satellite
+      ];
     };
     homeManager = 
     {config, lib, ...}:
