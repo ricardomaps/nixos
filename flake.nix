@@ -1,62 +1,39 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
-# Use `nix run .#write-flake` to regenerate it.
 {
   description = "System configuration";
 
-  outputs = inputs: import ./outputs.nix inputs;
-
   inputs = {
-    agenix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:ryantm/agenix";
-    };
-    den.url = "github:vic/den";
-    firefox-addons = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    };
-    flake-aspects.url = "github:vic/flake-aspects";
-    flake-file.url = "github:vic/flake-file";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    halloy-theme = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:ricardomaps/halloy-theme.nix";
-    };
-    helix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:helix-editor/helix";
-    };
-    home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager";
-    };
-    import-tree.url = "github:vic/import-tree";
-    mango = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:DreamMaoMao/mangowc";
-    };
-    neu-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:ricardomaps/neu-nix";
-    };
-    niri = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:sodiboo/niri-flake";
-    };
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    nix-index-database = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nix-index-database";
-    };
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    noctalia-shell = {
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:noctalia-dev/noctalia-shell";
     };
-    zen-browser = {
+    helium = {
+      url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:0xc000022070/zen-browser-flake";
     };
   };
+
+  outputs =
+  { nixpkgs, ... }@inputs:
+  {
+    nixosConfigurations.headful = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hardware-configuration.nix
+        ./config.nix
+        inputs.home-manager.nixosModules.default
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              helium-browser = inputs.helium.packages.x86_64-linux.default;
+            })
+          ];
+        }
+      ];
+    };
+  }
+  
+  ;
 
 }
