@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
     passage
@@ -36,6 +36,7 @@
     environmentVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
+      STEEL_HOME = "${config.home.homeDirectory}/.steel";
     };
     settings = {
       completions = {

@@ -13,6 +13,7 @@
       pkgs.nixfmt
       pkgs.steel-language-server
     ];
+
     settings ={
       theme = "catppuccin_mocha";
       keys = {

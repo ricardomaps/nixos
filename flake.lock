@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788349244,
-        "narHash": "sha256-v19SN8O20o/DgP6ffH9hUCsfTjm6f4uWmWC4UOuEmpA=",
+        "lastModified": 1788773794,
+        "narHash": "sha256-Zeg4kyCzmn9Ncc4Q6RgtSkdbgzXt0b1uxWgmsp4Y+Nw=",
         "owner": "amaanq",
         "repo": "helium-flake",
-        "rev": "02c6d2f33960eda4a3579247ef51be8f81690e82",
+        "rev": "32d6c84462fe4363f4794cb1226b3507fde8c9bb",
         "type": "github"
       },
       "original": {
@@ -27,26 +27,27 @@
         ]
       },
       "locked": {
-        "lastModified": 1788355065,
-        "narHash": "sha256-gAz5oTI7ur34CfuakQduiQd/2ZhO62Bn2XXg08nZYYQ=",
-        "owner": "nix-community",
+        "lastModified": 1788917181,
+        "narHash": "sha256-nY8/CgOymLn7U59Sdyn98FHd/4ffHnVep3vPO5it2v0=",
+        "owner": "ricardomaps",
         "repo": "home-manager",
-        "rev": "d9d750e4fc11c10cab2da677bdd31e427f3a3a71",
+        "rev": "f44fd12af6959e12ae4f0cfa5ba691db8edf401c",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "ricardomaps",
+        "ref": "add-miracle-wm",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1788179007,
-        "narHash": "sha256-hn1oU2rue2SYK8dAr8+WNZWtbsz1S2W5mnHlSEuh3bo=",
+        "lastModified": 1788881743,
+        "narHash": "sha256-2V9GZGvPfrNzxFozhI9dcqV+c3QdA8YZrvAAzqEB+dI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "34ab99075ac4f7e40cf037eef32cb1c360bb85e9",
+        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
         "type": "github"
       },
       "original": {

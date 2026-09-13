@@ -78,9 +78,12 @@
 
   security.sudo.enable = false;
 
+  security.rtkit.enable = true;
+
   # suid-less replacement for shadow
-  security.account-utils.enable = true;
-  security.shadow.enable = false;
+  # i wanted to set shadow to false and account-utils to true but it totally broke my system :(
+  # security.account-utils.enable = true;
+  security.shadow.enable = true;
 
   # this is the last suid binary, sadly can't replace it
   # programs.fuse.enable = false;
@@ -119,6 +122,7 @@
     alsa.enable = true;
     alsa.support32Bit = true; # this is for stupid wine/proton shit that only works with 32 bit
     pulse.enable = true;
+    jack.enable = true;
     wireplumber = {
       enable = true;
     };
@@ -128,6 +132,8 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "audio"
+      "network"
     ];
   };
 
@@ -165,7 +171,7 @@
   };  
 
   services.kmscon = {
-    enable = true;
+    enable = false;
     useXkbConfig = true;
     # you can set some cool asciicast options as well
     config = {
@@ -255,7 +261,12 @@
     usbutils
     pciutils
     helium-browser
+    supercollider-with-plugins
+    (haskellPackages.ghcWithPackages (ps: [
+      ps.tidal
+    ]))
   ];
+
 
   programs.noctalia = {
     enable = true;

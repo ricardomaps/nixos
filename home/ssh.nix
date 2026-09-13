@@ -11,6 +11,7 @@ in
 {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     settings =
       lib.genAttrs gitHosts (host:
         {
