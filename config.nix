@@ -267,6 +267,9 @@
     ]))
   ];
 
+  # programs.wayland.miracle-wm.enable = true;
+
+  programs.appimage.enable = true;
 
   programs.noctalia = {
     enable = true;

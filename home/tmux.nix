@@ -9,6 +9,7 @@
     clock24 = true;
     mouse = true;
     terminal = "tmux-256color";
+    keyMode = "vi";
     disableConfirmationPrompt = true;
   };
 }

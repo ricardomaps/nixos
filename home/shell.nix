@@ -54,5 +54,8 @@
       history.file_format = "sqlite";
       rm.always_trash = true;
     };
+    extraConfig = ''
+      source ${pkgs.nu_scripts}/share/nu_scripts/themes/nu-themes/catppuccin-mocha.nu
+    '';
   };
 }

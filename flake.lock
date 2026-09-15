@@ -27,32 +27,31 @@
         ]
       },
       "locked": {
-        "lastModified": 1788917181,
-        "narHash": "sha256-nY8/CgOymLn7U59Sdyn98FHd/4ffHnVep3vPO5it2v0=",
-        "owner": "ricardomaps",
+        "lastModified": 1789320570,
+        "narHash": "sha256-1Js4AJiWLV7U1SF3ok0J2tKbBEJYE5YpElGU+7fMbfo=",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f44fd12af6959e12ae4f0cfa5ba691db8edf401c",
+        "rev": "87b3c74df02a2b2e691a24f3c82774f48a70c1bd",
         "type": "github"
       },
       "original": {
-        "owner": "ricardomaps",
-        "ref": "add-miracle-wm",
+        "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1788881743,
-        "narHash": "sha256-2V9GZGvPfrNzxFozhI9dcqV+c3QdA8YZrvAAzqEB+dI=",
-        "owner": "nixos",
+        "lastModified": 1789272173,
+        "narHash": "sha256-OHIbKOhV9aFt5A3iyi7il3yibtBXe6L7daVEmi5IMGI=",
+        "owner": "ricardomaps",
         "repo": "nixpkgs",
-        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
+        "rev": "690c78f706b1c3c28e0cce8edfd77cbfb7781ca0",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
+        "owner": "ricardomaps",
+        "ref": "update-miracle",
         "repo": "nixpkgs",
         "type": "github"
       }

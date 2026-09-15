@@ -9,6 +9,8 @@ let
   ];
 in
 {
+  services.ssh-agent.enable = true;
+  
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -22,7 +24,6 @@ in
       ) // {
         "*" = {
           ForwardAgent = false;
-          # TODO: revisit this and configure it to use "confirm" with an askpass agent
           AddKeysToAgent = "yes"; 
           Compression = false;
           ServerAliveInterval = 0;
