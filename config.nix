@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, modulesPath, ... }:
 {
   environment.defaultPackages = [];
   programs.nano.enable = false;
@@ -88,6 +88,10 @@
   # this is the last suid binary, sadly can't replace it
   # programs.fuse.enable = false;
 
+  programs.sway.enable = true;
+  programs.sway.extraPackages = [];
+  programs.sway.package = pkgs.swayfx;
+  
   # need to learn apparmor first
   security.apparmor = {
     enable = true;
@@ -208,7 +212,7 @@
       trusted-users = [ "ricmaps" ];
       # don't stop building because one derivation failed, very useful
       keep-going = true;
-      keep-outputs = false;
+      keep-outputs = true;
       keep-derivations = true;
       log-lines = 40;
       warn-dirty = false;
@@ -261,13 +265,23 @@
     usbutils
     pciutils
     helium-browser
-    supercollider-with-plugins
-    (haskellPackages.ghcWithPackages (ps: [
-      ps.tidal
-    ]))
+    nix-diff
+    nix-tree
+    nix-init
   ];
 
   # programs.wayland.miracle-wm.enable = true;
+
+  # xdg.portal.wlr.enable = true;
+  # xdg.portal.extraPortals = [
+  #   pkgs.xdg-desktop-portal-gtk
+  # ];
+
+  # xdg.portal.config.miracle-wm = {
+  #   default = [ "gtk" ];
+  #   "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+  #   "org.freedesktop.impl.portal.Screenshot" = "wlr";
+  # };
 
   programs.appimage.enable = true;
 

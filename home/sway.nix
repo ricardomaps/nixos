@@ -9,7 +9,7 @@ in
 {
   wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.swayfx;
+    package = null;
     checkConfig = false;
     wrapperFeatures.gtk = true;
     config = {

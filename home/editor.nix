@@ -6,12 +6,11 @@
   
   programs.helix = {
     enable = true;
-    package = pkgs.steelix;
     defaultEditor = true;
     extraPackages = [
       pkgs.nixd
+      pkgs.nil
       pkgs.nixfmt
-      pkgs.steel-language-server
     ];
 
     settings ={

@@ -2,16 +2,11 @@
   description = "System configuration";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs.url = "github:ricardomaps/nixpkgs?ref=update-miracle";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # home-manager = {
-    #   url = "github:ricardomaps/home-manager?ref=add-miracle-wm";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     helium = {
       url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
