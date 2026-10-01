@@ -220,9 +220,11 @@
       use-xdg-base-directories = true;
       substituters = [
         "https://nix-community.cachix.org"
+        "https://ricardomaps.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "ricardomaps.cachix.org-1:AVvxxC1GomUHR6bxXYgkh/XsIr/yUbg8B/tKpN70Opw="
       ];
     };
   };
