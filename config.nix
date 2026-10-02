@@ -1,7 +1,10 @@
-{ pkgs, inputs, modulesPath, ... }:
+{ config, pkgs, inputs, modulesPath, lib, ... }:
 {
+  # TODO: need to get rid of xdg-utils for this to work
+  # imports = [ "${modulesPath}/profiles/perlless.nix" ];
   environment.defaultPackages = [];
   programs.nano.enable = false;
+  programs.less.enable = lib.mkForce false;
 
   time.timeZone = "America/Fortaleza";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -81,7 +84,7 @@
   security.rtkit.enable = true;
 
   # suid-less replacement for shadow
-  # i wanted to set shadow to false and account-utils to true but it totally broke my system :(
+  # i wanted to remove shadow and use only account-utils but it totally broke my system :(
   # security.account-utils.enable = true;
   security.shadow.enable = true;
 
@@ -92,9 +95,12 @@
   programs.sway.extraPackages = [];
   programs.sway.package = pkgs.swayfx;
   
-  # need to learn apparmor first
+  # does this work?
   security.apparmor = {
     enable = true;
+    enableCache = true;
+    killUnconfinedConfinables = true;
+    packages = [ pkgs.apparmor-profiles ];
   };
 
   hardware.enableRedistributableFirmware = true; # enables unfree firmware
@@ -132,13 +138,19 @@
     };
   };
 
-  users.users.ricmaps = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "audio"
-      "network"
-    ];
+  age.secrets.password.file = ./secrets/password.age; 
+
+  users = {
+    mutableUsers = false;
+    users.ricmaps = {
+      hashedPasswordFile = config.age.secrets.password.path;
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "audio"
+        "network"
+      ];
+    };
   };
 
   home-manager = {
@@ -229,15 +241,8 @@
     };
   };
 
-  documentation = {
-    enable = true;
-    man.cache.enable = true; # this makes apropos work
-    # mandoc is better than man-db
-    man.mandoc.enable = true;
-    man.man-db.enable = false;
-    # documentation for developers, me developer (supposedly)
-    dev.enable = true;
-  };
+  # i dislike all documentation formats, i just read stuff online. sue me
+  documentation.enable = lib.mkForce false;
 
   fonts = {
     # despite being named "default", this is not enabled by default! 
@@ -261,6 +266,9 @@
 
   services.gnome.gnome-keyring.enable = true;
 
+  # TODO: using systemd-sysusers and systemd-homed would be the ideal, but it's experimental
+  # services.userborn.enable = true;
+
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 
   environment.systemPackages = with pkgs; [
@@ -270,22 +278,9 @@
     nix-diff
     nix-tree
     nix-init
+    cachix
+    inputs.agenix.packages.x86_64-linux.default
   ];
-
-  # programs.wayland.miracle-wm.enable = true;
-
-  # xdg.portal.wlr.enable = true;
-  # xdg.portal.extraPortals = [
-  #   pkgs.xdg-desktop-portal-gtk
-  # ];
-
-  # xdg.portal.config.miracle-wm = {
-  #   default = [ "gtk" ];
-  #   "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-  #   "org.freedesktop.impl.portal.Screenshot" = "wlr";
-  # };
-
-  programs.appimage.enable = true;
 
   programs.noctalia = {
     enable = true;
@@ -313,6 +308,11 @@
     ];
     dates = "02:00";
   };
+
+  # bashless system activation
+  # system.nixos-init.enable = true;
+  # no perl. overlayfs over etc
+  # system.etc.overlay.enable = true;
 
   system.stateVersion = "25.05";
 }
