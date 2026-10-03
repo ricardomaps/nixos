@@ -18,6 +18,7 @@
   
   programs.git = {
     enable = true;
+    package = pkgs.gitMinimal;
     ignores = [
       ".env"
       ".envrc"
@@ -28,18 +29,16 @@
       key = "~/.ssh/github.com";
     };
     settings = {
-      user = {
-        name = "ricmaps";
-        email = "ricardomapurungajunior@gmail.com";
-      };
+      user.name = "ricmaps";
+      user.email = "ricardomapurungajunior@gmail.com";
       safe.directory = "/etc/nixos";
       init.defaultBranch = "main";
-      sendemail = {
-        smtpServer = "smtp.gmail.com";
-        smtpUser = "ricardomapurungajunior@gmail.com";
-        smtpServerPort = "587";
-        smtpEncryption = "tls";
-      };
+      # sendemail = {
+      #   smtpServer = "smtp.gmail.com";
+      #   smtpUser = "ricardomapurungajunior@gmail.com";
+      #   smtpServerPort = "587";
+      #   smtpEncryption = "tls";
+      # };
       push.autoSetupRemote = true;
     };
   };

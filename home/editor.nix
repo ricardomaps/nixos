@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.wl-clipboard # this is what makes opy to clipboard work
+    pkgs.wl-clipboard-rs # this is what makes opy to clipboard work
   ];
   
   programs.helix = {

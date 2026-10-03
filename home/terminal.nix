@@ -7,15 +7,6 @@
     pkgs.ueberzugpp
   ];
 
-  xdg.terminal-exec = {
-    enable = true;
-    settings = {
-      default = [
-        "alacritty.desktop"
-      ];
-    };
-  };
-
   programs.alacritty = {
     enable = true;
     theme = "catppuccin_mocha";

@@ -138,12 +138,10 @@
     };
   };
 
-  age.secrets.password.file = ./secrets/password.age; 
-
   users = {
     mutableUsers = false;
     users.ricmaps = {
-      hashedPasswordFile = config.age.secrets.password.path;
+      hashedPasswordFile = "/home/ricmaps/.config/nixos/password";
       isNormalUser = true;
       extraGroups = [
         "wheel"
@@ -267,7 +265,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   # TODO: using systemd-sysusers and systemd-homed would be the ideal, but it's experimental
-  # services.userborn.enable = true;
+  services.userborn.enable = true;
 
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 
@@ -279,7 +277,6 @@
     nix-tree
     nix-init
     cachix
-    inputs.agenix.packages.x86_64-linux.default
   ];
 
   programs.noctalia = {
@@ -310,9 +307,9 @@
   };
 
   # bashless system activation
-  # system.nixos-init.enable = true;
+  system.nixos-init.enable = true;
   # no perl. overlayfs over etc
-  # system.etc.overlay.enable = true;
+  system.etc.overlay.enable = true;
 
   system.stateVersion = "25.05";
 }
