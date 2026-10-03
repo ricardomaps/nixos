@@ -1,30 +1,37 @@
 { pkgs, config, ... }:
 {
   home.packages = with pkgs; [
-    passage
+    dust
     hyfetch # hyfetch has a module but it's way better to just configure it interactively
+    hyperfine
+    ouch
+    passage
     tokei
     typos
   ];
 
   programs.nix-your-shell.enable = true;
-
   programs.ripgrep.enable = true;
+  programs.bottom.enable = true;
+  programs.eza = {
+    enable = true;
+    git = true;
+    icons = "auto";
+    # need to look into this
+    # theme = "";
+    # extraOptions = [];
+  };
 
   programs.bat = {
     enable = true;
   };
 
   programs.zoxide.enable = true;
-
   programs.fd.enable = true;
-
   programs.carapace = {
     enable = true;
   };
-
   programs.starship.enable = true;
-
   home.shellAliases = {
     nr = "run0 nixos-rebuild switch --flake /etc/nixos";
     nb = "nix build";
@@ -36,7 +43,6 @@
     environmentVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
-      STEEL_HOME = "${config.home.homeDirectory}/.steel";
     };
     settings = {
       completions = {

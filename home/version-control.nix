@@ -33,12 +33,6 @@
       user.email = "ricardomapurungajunior@gmail.com";
       safe.directory = "/etc/nixos";
       init.defaultBranch = "main";
-      # sendemail = {
-      #   smtpServer = "smtp.gmail.com";
-      #   smtpUser = "ricardomapurungajunior@gmail.com";
-      #   smtpServerPort = "587";
-      #   smtpEncryption = "tls";
-      # };
       push.autoSetupRemote = true;
     };
   };
