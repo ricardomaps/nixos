@@ -43,10 +43,12 @@
       substituters = [
         "https://nix-community.cachix.org"
         "https://ricardomaps.cachix.org"
+        "https://cache.soopy.moe"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "ricardomaps.cachix.org-1:AVvxxC1GomUHR6bxXYgkh/XsIr/yUbg8B/tKpN70Opw="
+        "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="
       ];
     };
   };

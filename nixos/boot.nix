@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
 
   boot = {
@@ -19,6 +19,6 @@
     # if you don't set this to false you have opsec level fucked
     loader.systemd-boot.editor = false;
     loader.efi.canTouchEfiVariables = true;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   };  
 }

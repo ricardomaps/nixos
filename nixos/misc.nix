@@ -11,6 +11,7 @@
     usbutils
     pciutils
     helium-browser
+    dolphin-emu
   ];
 
   # bashless system activation
